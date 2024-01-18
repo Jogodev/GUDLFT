@@ -6,3 +6,5 @@ lib
 env/
 .envrc
 __pycache__
+.pytest_cache
+.vscode

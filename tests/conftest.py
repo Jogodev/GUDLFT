@@ -2,14 +2,32 @@ import pytest
 import server
 
 
-@pytest.fixture()
-def clubs_fixtures():
+@pytest.fixture(scope='function', autouse=True)
+def clubs_fixtures(monkeypatch):
     data = [
-        {"name": "Simply Lift", "email": "jotest@gmail.com", "points": "13"},
-        {"name": "Iron Temple", "email": "admin@irontemple.com", "points": "4"},
-        {"name": "She Lifts", "email": "kate@shelifts.co.uk", "points": "12"},
+        {"name": "Club Alpha", "email": "alpha@gmail.com", "points": "5"},
+        {"name": "Club Beta", "email": "beta@gmail.com", "points": "7"},
+        {"name": "Club Delta", "email": "delta@gmail.co.uk", "points": "14"},
     ]
-    return data
+    monkeypatch.setattr("server.clubs", data)
+
+
+@pytest.fixture(scope='function', autouse=True)
+def competitions_fixtures(monkeypatch):
+    data = [
+        {
+            "name": "Summer Festival",
+            "date": "2020-03-27 10:00:00",
+            "numberOfPlaces": "22",
+        },
+        {
+            "name": "Arnold Classic",
+            "date": "2020-10-22 13:30:00",
+            "numberOfPlaces": "13",
+        },
+        {"name": "Strong Event", "date": "2020-12-22 13:30:00", "numberOfPlaces": "30"},
+    ]
+    monkeypatch.setattr("server.competitions", data)
 
 
 @pytest.fixture()
