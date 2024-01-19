@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, flash, url_for
 
 
@@ -51,23 +52,28 @@ def book(competition, club):
 
 @app.route("/purchasePlaces", methods=["POST"])
 def purchasePlaces():
-    competition = [c for c in competitions if c["name"] == request.form["competition"]][0]
+    competition = [c for c in competitions if c["name"] == request.form["competition"]][
+        0
+    ]
     club = [c for c in clubs if c["name"] == request.form["club"]][0]
     placesRequired = int(request.form["places"])
     allowedPoints = int(club["points"])
 
-    if (placesRequired <= allowedPoints) and placesRequired <= 12:
+    if placesRequired > allowedPoints:
+        flash("Not enough points")
+        return render_template("booking.html", club=club, competition=competition)
+    elif placesRequired > 12:
+        flash("You able to book 12 places no more!")
+        return render_template("booking.html", club=club, competition=competition)
+    elif competition["date"] < datetime.now().strftime("%Y-%m-%d %H:%M:%S"):
+        flash("This competition is past!")
+        return render_template("booking.html", club=club, competition=competition)
+    else:
         flash("Great-booking complete!")
         competition["numberOfPlaces"] = (
             int(competition["numberOfPlaces"]) - placesRequired
         )
         return render_template("welcome.html", club=club, competitions=competitions)
-    elif placesRequired > 12:
-        flash("You able to book 12 places no more!")
-        return render_template("booking.html", club=club, competition=competition)
-    else:
-        flash("Not enough points")
-        return render_template("booking.html", club=club, competition=competition)
 
 
 # TODO: Add route for points display

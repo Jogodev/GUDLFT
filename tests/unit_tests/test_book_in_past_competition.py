@@ -1,24 +1,24 @@
 import server
 
 
-class TestAllowedPoints:
-    def test_allowed_points_not_enough(self, client):
-        club = server.clubs[1]
-        competition = server.competitions[2]
+class TestBookInPastCompetition:
+    def test_book_in_past_competition(self, client):
+        club = server.clubs[0]
+        competition = server.competitions[0]
         response = client.post(
             "/purchasePlaces",
             data={
                 "club": club["name"],
                 "competition": competition["name"],
-                "places": 10,
+                "places": 5,
             },
         )
-
-        assert b"Not enough points" in response.data
+        print(response.data)
         assert response.status_code == 200
+        assert b"This competition is past!" in response.data
 
-    def test_allowed_points_enough(self, client):
-        club = server.clubs[1]
+    def test_book_in_future_competition(self, client):
+        club = server.clubs[0]
         competition = server.competitions[2]
         response = client.post(
             "/purchasePlaces",
@@ -29,5 +29,5 @@ class TestAllowedPoints:
             },
         )
 
-        assert b"Great-booking complete!" in response.data
         assert response.status_code == 200
+        assert b"Great-booking complete!" in response.data

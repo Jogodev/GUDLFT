@@ -2,7 +2,7 @@ import pytest
 import server
 
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope="function", autouse=True)
 def clubs_fixtures(monkeypatch):
     data = [
         {"name": "Club Alpha", "email": "alpha@gmail.com", "points": "5"},
@@ -12,7 +12,7 @@ def clubs_fixtures(monkeypatch):
     monkeypatch.setattr("server.clubs", data)
 
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope="function", autouse=True)
 def competitions_fixtures(monkeypatch):
     data = [
         {
@@ -25,7 +25,7 @@ def competitions_fixtures(monkeypatch):
             "date": "2020-10-22 13:30:00",
             "numberOfPlaces": "13",
         },
-        {"name": "Strong Event", "date": "2020-12-22 13:30:00", "numberOfPlaces": "30"},
+        {"name": "Strong Event", "date": "2024-10-22 13:30:00", "numberOfPlaces": "30"},
     ]
     monkeypatch.setattr("server.competitions", data)
 
