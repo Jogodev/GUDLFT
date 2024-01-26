@@ -1,0 +1,37 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css')}}"
+    />
+    <title>Points display board</title>
+  </head>
+  <body>
+    <h1>Points display board</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Club</th>
+          <th scope="col">Points</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for club in clubs %}
+        <tr>
+          <th scope="col" class="clubname">{{club['name']}}</th>
+          <td class="clubpoints">{{club['points']}}</td>
+        </tr>
+        <tr>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </body>
+</html>

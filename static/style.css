@@ -1,0 +1,15 @@
+.table{
+    border-collapse: collapse;
+}
+
+tr {
+    border: 1px solid #333;
+}
+
+th, td {
+    font-size: x-large;
+    border: 1px solid #333;
+    text-align: center;
+    padding: 15px;
+}
+
