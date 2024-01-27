@@ -13,3 +13,8 @@ th, td {
     padding: 15px;
 }
 
+caption {
+    padding: 15px;
+    caption-side: top;
+    font-size: larger;
+}

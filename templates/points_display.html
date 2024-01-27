@@ -15,6 +15,7 @@
   </head>
   <body>
     <h1>Points display board</h1>
+    <caption>Clubs</caption>
     <table class="table">
       <thead>
         <tr>
@@ -25,8 +26,27 @@
       <tbody>
         {% for club in clubs %}
         <tr>
-          <th scope="col" class="clubname">{{club['name']}}</th>
-          <td class="clubpoints">{{club['points']}}</td>
+          <th>{{club['name']}}</th>
+          <td>{{club['points']}}</td>
+        </tr>
+        <tr>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+    <caption>Competitions</caption>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Club</th>
+          <th>Places</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for competition in competitions %}
+        <tr>
+          <th>{{competition['name']}}</th>
+          <td>{{competition['numberOfPlaces']}}</td>
         </tr>
         <tr>
         </tr>

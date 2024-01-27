@@ -28,7 +28,7 @@ def index():
 
 @app.route("/pointsDisplay")
 def pointsDisplay():
-    return render_template("points_display.html", clubs=clubs)
+    return render_template("points_display.html", clubs=clubs, competitions=competitions)
 
 
 @app.route("/showSummary", methods=["POST"])
@@ -62,9 +62,13 @@ def purchasePlaces():
     club = [c for c in clubs if c["name"] == request.form["club"]][0]
     placesRequired = int(request.form["places"])
     allowedPoints = int(club["points"])
+    availablePlaces = int(competition['numberOfPlaces'])
 
     if placesRequired > allowedPoints:
         flash("Not enough points")
+        return render_template("booking.html", club=club, competition=competition)
+    elif placesRequired > availablePlaces:
+        flash("Not enough places")
         return render_template("booking.html", club=club, competition=competition)
     elif placesRequired > 12:
         flash("You able to book 12 places no more!")
