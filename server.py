@@ -70,6 +70,9 @@ def purchasePlaces():
     elif placesRequired > availablePlaces:
         flash("Not enough places")
         return render_template("booking.html", club=club, competition=competition)
+    elif placesRequired <= 0:
+        flash("Yon can't enter 0 or negative number")
+        return render_template("booking.html", club=club, competition=competition)
     elif placesRequired > 12:
         flash("You able to book 12 places no more!")
         return render_template("booking.html", club=club, competition=competition)
